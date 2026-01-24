@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Премиум Колодцы и Септики МО | Денис</title>
+    <!-- Favicon (Золотая капля на вкладке) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fbbf24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.8-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z'/%3E%3Cpath d='M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.35c.71-.77 1.2-1.71 1.48-2.58.51-1.56 1-3.32 1.99-6.19Z'/%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1533630654593-b262d5d7842c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #c5a028 100%);
+        }
+        
+        .gold-text {
+            color: #d4af37;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-xl border-b border-slate-700">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="router('home')">
+                <i data-lucide="droplets" class="text-amber-400 w-8 h-8"></i>
+                <div>
+                    <h1 class="text-xl font-bold leading-none tracking-wide text-amber-50">WELLS-MO</h1>
+                    <p class="text-xs text-slate-400 tracking-wider">ПРЕМИУМ КАЧЕСТВО</p>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex gap-6 text-sm font-medium text-slate-300">
+                <a href="#" onclick="router('home')" class="hover:text-amber-400 transition">Главная</a>
+                <a href="#" onclick="router('cleaning')" class="hover:text-amber-400 transition">Чистка</a>
+                <a href="#" onclick="router('digging')" class="hover:text-amber-400 transition">Копка</a>
+                <a href="#" onclick="router('septic')" class="hover:text-amber-400 transition">Септики</a>
+                <a href="#" onclick="router('houses')" class="hover:text-amber-400 transition">Домики</a>
+                <a href="#" onclick="router('contacts')" class="hover:text-amber-400 transition">Контакты</a>
+            </nav>
+
+            <!-- Mobile Menu Button & Phone -->
+            <div class="flex items-center gap-4">
+                <!-- Telegram Icon Desktop -->
+                <a href="https://t.me/nenaity" target="_blank" class="hidden md:flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white w-10 h-10 rounded-full transition shadow-lg shadow-blue-900/20" title="Написать в Telegram">
+                    <i data-lucide="send" class="w-5 h-5 ml-0.5"></i>
+                </a>
+
+                <a href="tel:+79816666670" class="hidden md:flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition shadow-lg shadow-amber-900/20">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    <span class="font-bold">8 (981) 666-66-70</span>
+                </a>
+                <button class="lg:hidden text-white" onclick="toggleMenu()">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-slate-800 border-t border-slate-700">
+            <div class="flex flex-col p-4 space-y-3 text-center">
+                <a href="#" onclick="router('home'); toggleMenu()" class="text-slate-300 py-2 border-b border-slate-700">Главная</a>
+                <a href="#" onclick="router('cleaning'); toggleMenu()" class="text-slate-300 py-2 border-b border-slate-700">Чистка колодцев</a>
+                <a href="#" onclick="router('digging'); toggleMenu()" class="text-slate-300 py-2 border-b border-slate-700">Копка колодцев</a>
+                <a href="#" onclick="router('septic'); toggleMenu()" class="text-slate-300 py-2 border-b border-slate-700">Септики из ЖБ</a>
+                <a href="#" onclick="router('houses'); toggleMenu()" class="text-slate-300 py-2 border-b border-slate-700">Домики</a>
+                <a href="#" onclick="router('contacts'); toggleMenu()" class="text-slate-300 py-2">Контакты</a>
+                <!-- Mobile Telegram Link -->
+                <a href="https://t.me/nenaity" target="_blank" class="flex items-center justify-center gap-2 text-blue-400 py-2 font-bold">
+                    <i data-lucide="send" class="w-4 h-4"></i> Написать в Telegram
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app" class="flex-grow">
+        <!-- Content injects here via JS -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t border-slate-800">
+        <div class="container mx-auto px-4 grid md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-lucide="droplets" class="text-amber-500 w-6 h-6"></i>
+                    <span class="text-xl font-bold text-white serif-font">WELLS-MO</span>
+                </div>
+                <p class="text-sm leading-relaxed">
+                    Профессиональное обслуживание колодцев и септиков по всей Московской области. 
+                    Личный контроль качества на каждом этапе.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Услуги</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" onclick="router('cleaning')" class="hover:text-amber-400">Чистка и ремонт</a></li>
+                    <li><a href="#" onclick="router('digging')" class="hover:text-amber-400">Копка под ключ</a></li>
+                    <li><a href="#" onclick="router('septic')" class="hover:text-amber-400">Монтаж септиков</a></li>
+                    <li><a href="#" onclick="router('piping')" class="hover:text-amber-400">Водопровод и канализация</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Контакты</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="user" class="w-5 h-5 text-amber-500 shrink-0"></i>
+                        <span>Денис (Лично)</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="phone" class="w-5 h-5 text-amber-500 shrink-0"></i>
+                        <a href="tel:+79816666670" class="hover:text-white">8 (981) 666-66-70</a>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="send" class="w-5 h-5 text-blue-400 shrink-0"></i>
+                        <a href="https://t.me/nenaity" target="_blank" class="hover:text-white text-blue-400">Telegram: @nenaity</a>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="mail" class="w-5 h-5 text-amber-500 shrink-0"></i>
+                        <a href="mailto:info@wells-mo.ru" class="hover:text-white">info@wells-mo.ru</a>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-amber-500 shrink-0"></i>
+                        <span>Работаю по всей Московской области</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-slate-800 text-center text-xs">
+            &copy; 2024 WELLS-MO. Все права защищены. Разработано для Дениса.
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Data for pages
+        const content = {
+            home: `
+                <!-- Hero Section -->
+                <section class="hero-bg text-white py-24 md:py-32 relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/60"></div>
+                    <div class="container mx-auto px-4 relative z-10">
+                        <div class="max-w-3xl">
+                            <span class="bg-amber-500 text-slate-900 text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-4 inline-block">Премиум качество</span>
+                            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                                Колодцы и Септики<br>в Московской Области
+                            </h1>
+                            <p class="text-xl text-slate-300 mb-8 font-light">
+                                Личный контроль каждого заказа. Работаю без посредников. <br>
+                                Использую только премиальные материалы и гидроизоляцию.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button onclick="router('digging')" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg shadow-amber-900/40 text-center">
+                                    Рассчитать стоимость
+                                </button>
+                                <a href="https://t.me/nenaity" target="_blank" class="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-bold transition text-center shadow-lg shadow-blue-900/30">
+                                    <i data-lucide="send" class="w-5 h-5"></i> Написать в Telegram
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Features / Personal Brand -->
+                <section class="py-16 bg-white">
+                    <div class="container mx-auto px-4">
+                        <div class="flex flex-col md:flex-row items-center gap-12">
+                            <div class="md:w-1/2 relative">
+                                <div class="absolute -top-4 -left-4 w-24 h-24 bg-amber-100 rounded-full z-0"></div>
+                                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Специалист" class="relative z-10 rounded-xl shadow-2xl w-full h-80 object-cover">
+                                <div class="absolute bottom-6 -right-6 bg-slate-800 text-white p-6 rounded-lg shadow-xl z-20 max-w-xs">
+                                    <p class="font-serif text-lg italic">"Я лично отвечаю за каждый объект. Никаких менеджеров и посредников."</p>
+                                    <p class="mt-4 text-amber-500 font-bold">— Денис</p>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2">
+                                <h2 class="text-3xl font-bold mb-6 text-slate-900">Почему выбирают именно меня?</h2>
+                                <div class="space-y-6">
+                                    <div class="flex gap-4">
+                                        <div class="bg-amber-100 p-3 rounded-lg h-fit text-amber-600"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                                        <div>
+                                            <h3 class="font-bold text-lg">Премиум Материалы</h3>
+                                            <p class="text-slate-600">Я использую только проверенные расходники и гидроизоляцию "Глимс". Никакой экономии на качестве.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <div class="bg-amber-100 p-3 rounded-lg h-fit text-amber-600"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+                                        <div>
+                                            <h3 class="font-bold text-lg">Работа без посредников</h3>
+                                            <p class="text-slate-600">Вы общаетесь напрямую с исполнителем. Я лично выезжаю на заказы и контролирую процесс.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <div class="bg-amber-100 p-3 rounded-lg h-fit text-amber-600"><i data-lucide="map" class="w-6 h-6"></i></div>
+                                        <div>
+                                            <h3 class="font-bold text-lg">Вся Московская Область</h3>
+                                            <p class="text-slate-600">Мобильность и оперативность. Приеду в любую точку МО.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Services Grid Preview -->
+                <section class="py-16 bg-slate-50">
+                    <div class="container mx-auto px-4">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold mb-4">Мои Услуги</h2>
+                            <p class="text-slate-600">Полный спектр работ по водоснабжению и канализации</p>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            <!-- Card 1 -->
+                            <div onclick="router('cleaning')" class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition cursor-pointer group border border-slate-100">
+                                <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
+                                    <i data-lucide="waves" class="w-8 h-8"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Чистка колодцев</h3>
+                                <p class="text-slate-500 mb-4">Профессиональная чистка, дезинфекция, промазка швов.</p>
+                                <span class="text-amber-600 font-bold">16 000 ₽</span>
+                            </div>
+                            <!-- Card 2 -->
+                            <div onclick="router('digging')" class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition cursor-pointer group border border-slate-100">
+                                <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
+                                    <i data-lucide="shovel" class="w-8 h-8"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Копка колодцев</h3>
+                                <p class="text-slate-500 mb-4">Под ключ с материалами и гидроизоляцией.</p>
+                                <span class="text-amber-600 font-bold">от 8 500 ₽ / кольцо</span>
+                            </div>
+                             <!-- Card 3 -->
+                            <div onclick="router('septic')" class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition cursor-pointer group border border-slate-100">
+                                <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
+                                    <i data-lucide="layout-grid" class="w-8 h-8"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Септики из ЖБ</h3>
+                                <p class="text-slate-500 mb-4">Надежная канализация для загородного дома.</p>
+                                <span class="text-amber-600 font-bold">от 8 500 ₽ / кольцо</span>
+                            </div>
+                        </div>
+                        <div class="text-center mt-12">
+                            <button onclick="router('houses')" class="text-slate-600 hover:text-amber-600 font-medium underline underline-offset-4">Смотреть все услуги</button>
+                        </div>
+                    </div>
+                </section>
+            `,
+            cleaning: `
+                <section class="bg-slate-900 text-white py-16">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4 serif-font">Чистка колодцев</h1>
+                        <p class="text-slate-300 text-lg max-w-2xl">Верните воде кристальную чистоту. Комплексная услуга по очистке и дезинфекции.</p>
+                    </div>
+                </section>
+                <section class="py-16 bg-white fade-in">
+                    <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-6 text-slate-800">Что входит в стоимость?</h2>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="text-green-500 w-6 h-6 shrink-0"></i>
+                                    <span>Полная откачка воды</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="text-green-500 w-6 h-6 shrink-0"></i>
+                                    <span>Очистка дна от ила и грязи</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="text-green-500 w-6 h-6 shrink-0"></i>
+                                    <span>Промывка стен колодца</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="text-green-500 w-6 h-6 shrink-0"></i>
+                                    <span>Дезинфекция (по необходимости)</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="mt-8 p-6 bg-amber-50 rounded-xl border border-amber-100">
+                                <h3 class="font-bold text-amber-800 mb-2">Дополнительные услуги:</h3>
+                                <ul class="space-y-2 text-sm text-slate-700">
+                                    <li class="flex justify-between border-b border-amber-200 pb-2"><span>Промазка 1 шва</span> <span class="font-bold">3 000 ₽</span></li>
+                                    <li class="flex justify-between pt-2"><span>Скобирование (1 шов, 3 скобы)</span> <span class="font-bold">1 500 ₽</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 p-8 rounded-2xl shadow-lg border border-slate-100 h-fit">
+                            <h3 class="text-xl font-bold mb-6 text-center">Стоимость комплекса</h3>
+                            <div class="text-5xl font-bold text-center text-amber-600 mb-2">16 000 ₽</div>
+                            <p class="text-center text-slate-500 text-sm mb-8">Фиксированная цена</p>
+                            <a href="tel:+79816666670" class="block w-full bg-slate-900 hover:bg-slate-800 text-white text-center py-4 rounded-lg font-bold transition">Заказать чистку</a>
+                            <p class="text-center mt-4 text-sm text-slate-500">Лично Денис приедет на заказ</p>
+                        </div>
+                    </div>
+                </section>
+            `,
+            digging: `
+                <section class="bg-slate-900 text-white py-16">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4 serif-font">Копка колодцев под ключ</h1>
+                        <p class="text-slate-300 text-lg max-w-2xl">Профессиональное строительство питьевых колодцев с использованием премиум материалов.</p>
+                    </div>
+                </section>
+                <section class="py-16 bg-white fade-in">
+                    <div class="container mx-auto px-4">
+                         <div class="bg-amber-50 border-l-4 border-amber-500 p-6 mb-12">
+                            <h3 class="font-bold text-lg mb-2">Важно знать!</h3>
+                            <p class="text-slate-700">Я использую только <strong>премиум расходники</strong> и профессиональную <strong>гидроизоляцию GLIMS</strong>. Это гарантирует долговечность и чистоту воды.</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h2 class="text-2xl font-bold mb-6">Что входит в стоимость "Под ключ"?</h2>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-lg">
+                                        <div class="font-bold text-4xl text-slate-200">01</div>
+                                        <div>
+                                            <h4 class="font-bold">ЖБ Кольцо</h4>
+                                            <p class="text-sm text-slate-500">Экологически чистое, армированное</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-lg">
+                                        <div class="font-bold text-4xl text-slate-200">02</div>
+                                        <div>
+                                            <h4 class="font-bold">Монтаж и Копка</h4>
+                                            <p class="text-sm text-slate-500">Ручная копка шахты, установка</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-lg">
+                                        <div class="font-bold text-4xl text-slate-200">03</div>
+                                        <div>
+                                            <h4 class="font-bold">Герметизация GLIMS</h4>
+                                            <p class="text-sm text-slate-500">Надежная гидроизоляция швов</p>
+                                        </div>
+                                    </div>
+                                     <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-lg">
+                                        <div class="font-bold text-4xl text-slate-200">04</div>
+                                        <div>
+                                            <h4 class="font-bold">Скобирование</h4>
+                                            <p class="text-sm text-slate-500">Фиксация колец скобами для прочности</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Price Block -->
+                            <div class="bg-white border-2 border-slate-900 rounded-xl p-8 shadow-xl relative overflow-hidden">
+                                <div class="absolute top-0 right-0 bg-amber-500 text-white text-xs font-bold px-3 py-1 uppercase">Best offer</div>
+                                <h3 class="text-2xl font-bold text-slate-900 mb-2">Цена за 1 кольцо</h3>
+                                <div class="text-5xl font-bold text-amber-600 mb-4">от 8 500 ₽</div>
+                                <p class="text-slate-500 mb-8 border-b pb-4">Включает: Кольцо + Работа + Материал + Скобирование + Глимс</p>
+                                
+                                <h4 class="font-bold text-sm uppercase text-slate-400 mb-4">Дополнительно:</h4>
+                                <ul class="space-y-3 mb-8">
+                                    <li class="flex justify-between text-sm">
+                                        <span>Подводка водопровода (п.м.)</span>
+                                        <span class="font-bold">от 1 800 ₽</span>
+                                    </li>
+                                     <li class="flex justify-between text-sm">
+                                        <span>Домик для колодца</span>
+                                        <span class="font-bold">от 16 000 ₽</span>
+                                    </li>
+                                </ul>
+
+                                <a href="tel:+79816666670" class="block w-full bg-amber-600 hover:bg-amber-700 text-white text-center py-4 rounded-lg font-bold transition">Вызвать Дениса на замер</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `,
+            septic: `
+                <section class="bg-slate-900 text-white py-16">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4 serif-font">Септик из ЖБ Колец</h1>
+                        <p class="text-slate-300 text-lg max-w-2xl">Надежная автономная канализация для вашего дома. Под ключ.</p>
+                    </div>
+                </section>
+                <section class="py-16 bg-white fade-in">
+                    <div class="container mx-auto px-4">
+                        <div class="grid md:grid-cols-2 gap-12">
+                             <div class="space-y-6">
+                                <h2 class="text-3xl font-bold text-slate-900">Капитальная канализация</h2>
+                                <p class="text-slate-600 leading-relaxed">
+                                    Септик из бетонных колец — это самое надежное и долговечное решение для частного дома. В отличие от пластиковых септиков, бетон не всплывает и не деформируется.
+                                </p>
+                                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                                    <h3 class="font-bold mb-4 flex items-center gap-2">
+                                        <i data-lucide="hammer" class="text-amber-500 w-5 h-5"></i>
+                                        Технология монтажа:
+                                    </h3>
+                                    <ul class="space-y-2 list-disc list-inside text-slate-700">
+                                        <li>Копка шахты под диаметр колец</li>
+                                        <li>Установка колец манипулятором или вручную</li>
+                                        <li>Гидроизоляция швов (GLIMS) - <strong>Обязательно!</strong></li>
+                                        <li>Монтаж переливов между камерами</li>
+                                        <li>Установка крышек и люков</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800 text-white rounded-2xl p-8 shadow-2xl flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-6 text-amber-400">Стоимость под ключ</h3>
+                                    <div class="text-6xl font-bold mb-2">8 500 ₽</div>
+                                    <p class="text-slate-400 mb-8">за одно кольцо (с работой и материалами)</p>
+                                    
+                                    <div class="space-y-4 mb-8">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                            <span>Премиум расходники</span>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                            <span>Гидроизоляция Глимс</span>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                            <span>Подводка трубы (от 1800₽/м)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="tel:+79816666670" class="w-full bg-white text-slate-900 hover:bg-slate-200 py-4 rounded-lg font-bold transition text-center">Рассчитать смету</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `,
+            houses: `
+                <section class="bg-slate-900 text-white py-16">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4 serif-font">Домики для колодцев</h1>
+                        <p class="text-slate-300 text-lg max-w-2xl">Защита воды от мусора и осадков + эстетика вашего участка.</p>
+                    </div>
+                </section>
+                <section class="py-16 bg-white fade-in">
+                    <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                             <img src="https://images.unsplash.com/photo-1518730598075-84dc24888151?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Колодезный домик" class="rounded-xl shadow-lg w-full h-96 object-cover">
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6">Защита и красота</h2>
+                            <p class="text-slate-600 mb-8">
+                                Домик необходим для того, чтобы в шахту колодца не попадали листья, насекомые, пыль и атмосферные осадки. Мы изготавливаем прочные и красивые домики из качественного дерева.
+                            </p>
+                            <div class="flex items-end gap-4 mb-8">
+                                <div class="text-5xl font-bold text-amber-600">от 16 000 ₽</div>
+                                <div class="text-slate-500 pb-2">за домик с установкой</div>
+                            </div>
+                            <a href="tel:+79816666670" class="inline-block bg-slate-900 text-white px-8 py-4 rounded-lg font-bold hover:bg-slate-800 transition">Заказать домик</a>
+                        </div>
+                    </div>
+                </section>
+            `,
+            piping: `
+                <section class="bg-slate-900 text-white py-16">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4 serif-font">Подводка коммуникаций</h1>
+                        <p class="text-slate-300 text-lg max-w-2xl">Водопровод в дом и отведение канализации. Зимний и летний вариант.</p>
+                    </div>
+                </section>
+                <section class="py-16 bg-white fade-in">
+                    <div class="container mx-auto px-4 max-w-4xl">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-600 uppercase text-sm">
+                                        <th class="p-6 font-bold">Наименование услуги</th>
+                                        <th class="p-6 font-bold text-right">Цена</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <tr>
+                                        <td class="p-6">
+                                            <div class="font-bold text-slate-800 text-lg">Подводка водопровода</div>
+                                            <div class="text-sm text-slate-500">Копка траншеи + укладка трубы + обратная засыпка (за 1 п.м.)</div>
+                                        </td>
+                                        <td class="p-6 text-right font-bold text-amber-600 text-lg">от 1 800 ₽</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-6">
+                                            <div class="font-bold text-slate-800 text-lg">Подводка канализационной трубы</div>
+                                            <div class="text-sm text-slate-500">С соблюдением уклона (за 1 п.м.)</div>
+                                        </td>
+                                        <td class="p-6 text-right font-bold text-amber-600 text-lg">от 1 800 ₽</td>
+                                    </tr>
+                                     <tr>
+                                        <td class="p-6">
+                                            <div class="font-bold text-slate-800 text-lg">Ввод в дом</div>
+                                            <div class="text-sm text-slate-500">Алмазное бурение фундамента, подключение</div>
+                                        </td>
+                                        <td class="p-6 text-right font-bold text-slate-800">Договорная</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <p class="mb-4 text-slate-600">Нужен расчет трассы?</p>
+                            <a href="tel:+79816666670" class="inline-flex items-center gap-2 text-amber-600 font-bold hover:text-amber-700 text-lg">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                                Позвонить Денису: 8 (981) 666-66-70
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            `,
+            contacts: `
+                <section class="py-16 bg-slate-50 flex-grow">
+                    <div class="container mx-auto px-4 max-w-4xl">
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+                            <div class="bg-slate-900 text-white p-12 md:w-5/12">
+                                <h2 class="text-3xl font-bold mb-6 serif-font text-amber-500">Контакты</h2>
+                                <p class="text-slate-300 mb-8">Я всегда на связи. Если я не взял трубку — значит я в колодце. Я обязательно перезвоню.</p>
+                                
+                                <div class="space-y-6">
+                                    <div>
+                                        <div class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-1">Мастер</div>
+                                        <div class="text-xl font-bold">Денис</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-1">Телефон</div>
+                                        <a href="tel:+79816666670" class="text-xl font-bold hover:text-amber-400 transition">8 (981) 666-66-70</a>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-1">Telegram</div>
+                                        <a href="https://t.me/nenaity" target="_blank" class="text-xl font-bold hover:text-blue-400 transition flex items-center gap-2">
+                                            <i data-lucide="send" class="w-5 h-5"></i> @nenaity
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-1">Email</div>
+                                        <a href="mailto:info@wells-mo.ru" class="text-xl font-bold hover:text-amber-400 transition">info@wells-mo.ru</a>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-1">Регион</div>
+                                        <div class="text-lg">Вся Московская Область</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-12 md:w-7/12 flex flex-col justify-center text-center">
+                                <h3 class="text-2xl font-bold mb-4 text-slate-800">Остались вопросы?</h3>
+                                <p class="text-slate-600 mb-8">Звоните напрямую, без посредников. Я проконсультирую вас по стоимости работ и материалам.</p>
+                                <a href="tel:+79816666670" class="bg-amber-600 hover:bg-amber-700 text-white py-4 px-8 rounded-lg font-bold shadow-lg shadow-amber-900/20 transition transform hover:-translate-y-1 mb-4 block w-full">
+                                    Позвонить сейчас
+                                </a>
+                                <a href="https://t.me/nenaity" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white py-4 px-8 rounded-lg font-bold shadow-lg shadow-blue-900/20 transition transform hover:-translate-y-1 block w-full flex items-center justify-center gap-2">
+                                    <i data-lucide="send" class="w-5 h-5"></i> Написать в Telegram
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `
+        };
+
+        // Router function
+        function router(pageName) {
+            const app = document.getElementById('app');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            // Set content
+            if (content[pageName]) {
+                app.innerHTML = content[pageName];
+            } else {
+                app.innerHTML = content['home'];
+            }
+
+            // Re-initialize icons
+            lucide.createIcons();
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            router('home');
+        });
+
+    </script>
+</body>
+</html>
