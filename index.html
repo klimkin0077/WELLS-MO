@@ -2,64 +2,82 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>WELLS-MO 2026 | Экспертное обслуживание колодцев и септиков</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Чистка и копка колодцев по всей Московской области. Септики под ключ, монтаж ЖБ колец. Гарантия качества, договор, премиальное оборудование.">
+    <meta name="keywords" content="чистка колодцев московская область, копка колодца подмосковье, септик под ключ мо, монтаж жб колец">
+    <title>WELLS-MO 2026 | Премиальные Колодцы и Септики МО</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
-        
         :root {
-            --accent: #fbbf24;
-            --dark: #0a0a0c;
-            --card-bg: #111114;
+            --primary: #0F1724; /* Темный антрацит */
+            --accent: #C79A3F; /* Золото/Медь */
+            --glass: rgba(15, 23, 36, 0.7);
+            --border: rgba(199, 154, 63, 0.2);
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--dark);
-            color: white;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary);
+            color: #E2E8F0;
             overflow-x: hidden;
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        h1, h2, h3, h4, .font-heading { 
-            font-family: 'Montserrat', sans-serif; 
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Montserrat', sans-serif;
             letter-spacing: -0.02em;
         }
 
-        .hero-title {
-            font-size: clamp(2rem, 6vw, 4rem);
-            line-height: 1.1;
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .glass-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.07);
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .glass-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
         }
 
+        .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Fullscreen Navigation Overlay */
         #nav-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(5, 5, 7, 0.98);
-            backdrop-filter: blur(15px);
+            background: rgba(15, 23, 36, 0.98);
+            backdrop-filter: blur(25px);
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
         #nav-overlay.active {
@@ -67,447 +85,840 @@
             visibility: visible;
         }
 
-        .menu-link {
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
-            font-weight: 900;
+        /* Staggered Menu Animation */
+        #nav-overlay nav button {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        #nav-overlay.active nav button {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay for each item */
+        #nav-overlay.active nav button:nth-child(1) { transition-delay: 0.1s; }
+        #nav-overlay.active nav button:nth-child(2) { transition-delay: 0.15s; }
+        #nav-overlay.active nav button:nth-child(3) { transition-delay: 0.2s; }
+        #nav-overlay.active nav button:nth-child(4) { transition-delay: 0.25s; }
+        #nav-overlay.active nav button:nth-child(5) { transition-delay: 0.3s; }
+        #nav-overlay.active nav button:nth-child(6) { transition-delay: 0.35s; }
+
+        .menu-link-item {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            color: rgba(255,255,255,0.5);
             text-transform: uppercase;
-            transition: 0.3s;
+            letter-spacing: -0.02em;
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
+            display: block;
+            margin-bottom: 1rem;
         }
 
-        .menu-link:hover {
+        .menu-link-item:hover {
             color: var(--accent);
-            transform: translateX(10px);
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--dark); }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-        .service-content { display: none; }
-        .service-content.active { display: block; animation: fadeIn 0.5s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transform: scale(1.05);
         }
         
-        .advantage-pill {
-            background: rgba(251, 191, 36, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-            padding: 2px 10px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
+        .menu-link-item.active-page {
+            color: white;
         }
+        
+        .menu-link-item.active-page::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.5em;
+        }
+
+        /* Interactive Elements */
+        .cta-pulse {
+            animation: pulse-gold 2s infinite;
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(199, 154, 63, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(199, 154, 63, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(199, 154, 63, 0); }
+        }
+
+        .router-view { display: none; }
+        .router-view.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Floating Button */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 40;
+            transition: transform 0.3s;
+        }
+        .floating-cta:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
 
-    <!-- Навигация -->
-    <div id="nav-overlay">
-        <button onclick="toggleMenu()" class="absolute top-8 right-8 text-white/50 hover:text-white transition">
-            <i data-lucide="x" class="w-10 h-10"></i>
-        </button>
-        <nav class="flex flex-col space-y-6 text-center">
-            <button onclick="router('home')" class="menu-link">Главная</button>
-            <button onclick="router('services')" class="menu-link">Наши услуги</button>
-            <button onclick="router('works')" class="menu-link">Наши работы</button>
-            <button onclick="router('price')" class="menu-link">Прайс-лист 2026</button>
-            <button onclick="router('contacts')" class="menu-link text-amber-500 font-black">Срочная связь</button>
-        </nav>
-    </div>
-
-    <!-- Шапка -->
-    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="router('home')">
-                <div class="bg-amber-500 p-1.5 rounded-lg shadow-lg shadow-amber-500/20">
-                    <i data-lucide="droplets" class="text-black w-5 h-5"></i>
+    <!-- Navigation Header -->
+    <header class="fixed top-0 w-full z-50 bg-[#0F1724]/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="main-header">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="router('home')">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#C79A3F] to-[#8a6a26] flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition">
+                    <i data-lucide="droplets" class="w-6 h-6"></i>
                 </div>
-                <span class="text-xl font-black tracking-tighter uppercase">WELLS-MO <span class="text-amber-500">2026</span></span>
+                <div>
+                    <span class="block font-heading font-black text-xl tracking-tighter leading-none text-white">WELLS-MO</span>
+                    <span class="block text-[9px] font-bold tracking-[0.3em] text-[#C79A3F] uppercase">Service 2026</span>
+                </div>
             </div>
-            
-            <div class="flex items-center gap-6">
-                <a href="tel:+79816666670" class="hidden md:block text-sm font-black hover:text-amber-500 transition">8 (981) 666-66-70</a>
-                <button onclick="toggleMenu()" class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition">
-                    <span class="text-[10px] font-black uppercase tracking-widest hidden sm:inline">Меню</span>
-                    <i data-lucide="align-right" class="w-5 h-5 text-amber-500"></i>
+
+            <!-- Desktop Menu (Hidden on mobile) -->
+            <div class="hidden lg:flex items-center gap-8">
+                <button onclick="router('works')" class="text-sm font-semibold hover:text-[#C79A3F] transition uppercase tracking-wider">Наши работы</button>
+                <button onclick="router('price')" class="text-sm font-semibold hover:text-[#C79A3F] transition uppercase tracking-wider">Прайс-лист</button>
+                <button onclick="router('about')" class="text-sm font-semibold hover:text-[#C79A3F] transition uppercase tracking-wider">О компании</button>
+                <button onclick="openModal()" class="bg-[#C79A3F] text-[#0F1724] px-6 py-3 rounded-xl font-bold hover:bg-white transition shadow-[0_0_20px_rgba(199,154,63,0.3)]">
+                    Связаться
                 </button>
             </div>
+
+            <!-- Mobile Burger (Small Icon, Huge Impact) -->
+            <button class="lg:hidden p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition active:scale-95" onclick="toggleMenu()">
+                <i data-lucide="menu" class="w-6 h-6 text-[#C79A3F]"></i>
+            </button>
         </div>
     </header>
 
-    <main id="app-content" class="pt-16">
-        <!-- Контент -->
+    <!-- Fullscreen Menu Overlay -->
+    <div id="nav-overlay">
+        <button class="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition group" onclick="toggleMenu()">
+            <i data-lucide="x" class="w-10 h-10 text-white/50 group-hover:text-white transition"></i>
+        </button>
+        <nav class="flex flex-col items-center justify-center h-full">
+            <button onclick="router('home'); toggleMenu()" class="menu-link-item active-page">Главная</button>
+            <button onclick="router('cleaning'); toggleMenu()" class="menu-link-item">Чистка</button>
+            <button onclick="router('digging'); toggleMenu()" class="menu-link-item">Копка</button>
+            <button onclick="router('septic'); toggleMenu()" class="menu-link-item">Септики</button>
+            <button onclick="router('price'); toggleMenu()" class="menu-link-item">Цены</button>
+            <button onclick="router('contacts'); toggleMenu()" class="menu-link-item text-[#C79A3F]!important opacity-100!important mt-4 border-b-2 border-[#C79A3F]">Контакты</button>
+        </nav>
+    </div>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta flex flex-col gap-3">
+        <a href="https://wa.me/79816666670" target="_blank" class="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg hover:scale-110 transition">
+            <i data-lucide="message-circle" class="w-7 h-7"></i>
+        </a>
+        <a href="tel:+79816666670" class="w-14 h-14 rounded-full bg-[#C79A3F] flex items-center justify-center text-[#0F1724] shadow-lg hover:scale-110 transition cta-pulse">
+            <i data-lucide="phone" class="w-7 h-7"></i>
+        </a>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="app" class="pt-20 min-h-screen">
+        <!-- Content injects here -->
     </main>
 
-    <!-- Футер -->
-    <footer class="bg-[#050507] pt-20 pb-10 border-t border-white/5 px-6">
-        <div class="container mx-auto grid md:grid-cols-3 gap-12 mb-16">
-            <div>
-                <h3 class="text-2xl font-black mb-6 uppercase tracking-tighter">WELLS-MO <span class="text-amber-500">2026</span></h3>
-                <p class="text-slate-500 text-sm leading-relaxed max-w-xs">Профессиональная инженерная команда Дениса. Мы знаем о колодцах всё: от геологии до финишной герметизации швов.</p>
+    <!-- Global Footer -->
+    <footer class="bg-[#0a0f18] border-t border-white/5 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <i data-lucide="droplets" class="text-[#C79A3F]"></i>
+                        <span class="font-heading font-bold text-xl">WELLS-MO</span>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6">Работаем по всей Московской области. Премиальный сервис колодцев с гарантией.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-slate-400 hover:text-[#C79A3F]"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-[#C79A3F]"><i data-lucide="youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Услуги</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><button onclick="router('cleaning')" class="hover:text-[#C79A3F] transition">Чистка колодцев</button></li>
+                        <li><button onclick="router('digging')" class="hover:text-[#C79A3F] transition">Копка под ключ</button></li>
+                        <li><button onclick="router('septic')" class="hover:text-[#C79A3F] transition">Септики ЖБ</button></li>
+                        <li><button onclick="router('repair')" class="hover:text-[#C79A3F] transition">Ремонт шахт</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Информация</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><button onclick="router('about')" class="hover:text-[#C79A3F] transition">О компании</button></li>
+                        <li><button onclick="router('works')" class="hover:text-[#C79A3F] transition">Портфолио</button></li>
+                        <li><button onclick="router('price')" class="hover:text-[#C79A3F] transition">Скачать Прайс</button></li>
+                        <li><button onclick="router('contacts')" class="hover:text-[#C79A3F] transition">Контакты</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Контакты</h4>
+                    <a href="tel:+79816666670" class="block text-2xl font-heading font-black text-[#C79A3F] mb-2">8 (981) 666-66-70</a>
+                    <p class="text-sm text-slate-400 mb-2">Ежедневно 08:00 - 22:00</p>
+                    <p class="text-sm text-slate-400">Московская область</p>
+                    <button onclick="openModal()" class="mt-4 text-xs font-bold uppercase tracking-widest border-b border-[#C79A3F] text-[#C79A3F] pb-1">Заказать звонок</button>
+                </div>
             </div>
-            <div>
-                <h4 class="text-amber-500 font-black uppercase text-[10px] tracking-[0.3em] mb-6">Информация</h4>
-                <ul class="space-y-3 text-sm font-bold text-slate-400">
-                    <li><button onclick="router('services')" class="hover:text-white transition uppercase">Услуги по очистке</button></li>
-                    <li><button onclick="router('works')" class="hover:text-white transition uppercase">Наши объекты</button></li>
-                    <li><button onclick="router('price')" class="hover:text-white transition uppercase">Прайс-лист</button></li>
-                </ul>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-600">
+                <p>&copy; 2026 WELLS-MO. Все права защищены.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <span>Политика конфиденциальности</span>
+                    <span>Договор оферты</span>
+                </div>
             </div>
-            <div>
-                <h4 class="text-amber-500 font-black uppercase text-[10px] tracking-[0.3em] mb-6">Связь с Денисом</h4>
-                <a href="tel:+79816666670" class="text-2xl font-black block mb-2 hover:text-amber-500 transition">8 (981) 666-66-70</a>
-                <p class="text-slate-500 text-xs uppercase font-bold">Московская область • Работаем ежедневно</p>
-            </div>
-        </div>
-        <div class="container mx-auto pt-8 border-t border-white/5 text-center text-[10px] font-bold uppercase tracking-widest opacity-40">
-            <span>&copy; 2026 WELLS-MO — Крупнейший оператор колодезных услуг в регионе</span>
         </div>
     </footer>
 
+    <!-- Modal Form -->
+    <div id="modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-[#161e2e] p-8 rounded-2xl w-full max-w-md border border-white/10 shadow-2xl transform transition-all scale-100">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x"></i></button>
+            <h3 class="text-2xl font-heading font-bold mb-2 text-white">Заказать расчет</h3>
+            <p class="text-slate-400 text-sm mb-6">Оставьте номер, Денис перезвонит в течение 15 минут.</p>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Заявка отправлена!'); closeModal();">
+                <input type="text" placeholder="Ваше имя" class="w-full bg-[#0F1724] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#C79A3F] focus:outline-none transition">
+                <input type="tel" placeholder="+7 (999) 000-00-00" class="w-full bg-[#0F1724] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#C79A3F] focus:outline-none transition">
+                <select class="w-full bg-[#0F1724] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#C79A3F] focus:outline-none transition">
+                    <option>Чистка колодца</option>
+                    <option>Копка / Септик</option>
+                    <option>Ремонт</option>
+                    <option>Другое</option>
+                </select>
+                <button type="submit" class="w-full bg-[#C79A3F] text-[#0F1724] font-bold py-4 rounded-xl hover:bg-white transition uppercase tracking-widest text-sm">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
     <script>
+        // Content Data
         const content = {
             home: `
-                <section class="relative min-h-[90vh] flex items-center px-6 py-20 overflow-hidden">
-                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#1a1a20_0%,#0a0a0c_100%)]"></div>
-                    <div class="container mx-auto relative z-10 text-center md:text-left">
-                        <div class="max-w-4xl">
-                            <span class="inline-block border border-amber-500/30 bg-amber-500/5 text-amber-500 px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-6">Технологический лидер региона 2026</span>
-                            <h1 class="hero-title font-black uppercase mb-8">
-                                ПРОФЕССИОНАЛЬНОЕ <br/><span class="text-amber-500 text-shadow-lg">ОБСЛУЖИВАНИЕ КОЛОДЦЕВ.</span>
+                <!-- Hero Section with Parallax Feel -->
+                <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+                    <div class="absolute inset-0 z-0">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#0F1724] via-[#0F1724]/90 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2000" class="w-full h-full object-cover opacity-40 parallax-layer" style="transform: scale(1.1)">
+                    </div>
+                    
+                    <div class="container mx-auto px-6 relative z-20 pt-20">
+                        <div class="max-w-3xl fade-in-up">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C79A3F]/10 border border-[#C79A3F]/30 text-[#C79A3F] text-[10px] font-bold uppercase tracking-widest mb-6">
+                                <span class="w-2 h-2 rounded-full bg-[#C79A3F] animate-pulse"></span>
+                                Работаем по всей Московской области
+                            </div>
+                            <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-white mb-8 leading-[1.1]">
+                                КОЛОДЦЫ <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#C79A3F] to-[#FCD34D]">ПРЕМИУМ</span> КЛАССА
                             </h1>
-                            <p class="text-slate-400 text-base md:text-xl max-w-2xl mb-12 font-medium leading-relaxed">
-                                Мы собрали лучшие технологии конкурентов и умножили их на собственный опыт. Сверхмощное оборудование, ручная и машинная копка, полная герметизация. Делаем колодцы «под ключ» там, где другие сдаются.
+                            <p class="text-lg text-slate-300 mb-10 max-w-xl leading-relaxed">
+                                Профессиональная чистка и копка. Оборудование 400 Бар. Насосы Belamos. Гарантия 6 месяцев. <span class="text-white font-bold">Работаем в любую погоду — не катаем вату.</span>
                             </p>
                             
-                            <!-- ТРИ КНОПКИ -->
-                            <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                                <button onclick="router('services')" class="bg-amber-500 text-black px-8 py-5 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-400 transition shadow-xl shadow-amber-500/20 w-full sm:w-auto">Наши услуги</button>
-                                <button onclick="router('works')" class="bg-white/5 border border-white/10 px-8 py-5 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-white/10 transition w-full sm:w-auto">Наши работы</button>
-                                <button onclick="router('price')" class="bg-white/5 border border-white/10 px-8 py-5 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-white/10 transition w-full sm:w-auto">Прайс-лист</button>
+                            <div class="flex flex-wrap gap-4">
+                                <button onclick="router('cleaning')" class="bg-[#C79A3F] text-[#0F1724] px-8 py-4 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-white transition shadow-[0_10px_30px_rgba(199,154,63,0.3)]">
+                                    Заказать чистку
+                                </button>
+                                <button onclick="router('price')" class="bg-transparent border border-white/20 text-white px-8 py-4 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition backdrop-blur-md">
+                                    Прайс-лист
+                                </button>
+                            </div>
+
+                            <div class="mt-16 flex items-center gap-8 text-sm font-semibold text-slate-400">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="star" class="text-[#C79A3F] w-5 h-5 fill-[#C79A3F]"></i>
+                                    <span>5.0 на Avito (100+ отзывов)</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="shield-check" class="text-[#C79A3F] w-5 h-5"></i>
+                                    <span>Договор и Гарантия</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Основные колонки (Исправлено) -->
-                <section class="py-24 px-6 container mx-auto">
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div class="glass-card p-8 rounded-3xl">
-                            <div class="bg-amber-500/10 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                                <i data-lucide="zap" class="text-amber-500 w-6 h-6"></i>
-                            </div>
-                            <h3 class="text-lg font-black mb-4 uppercase leading-tight">Сверхмощное <br>оборудование</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Промышленные мойки 400 Бар. Полное уничтожение грибка, слизи и налета на молекулярном уровне. Обычные мойки не дают такого эффекта.</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-3xl">
-                            <div class="bg-blue-500/10 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                                <i data-lucide="shield-check" class="text-blue-500 w-6 h-6"></i>
-                            </div>
-                            <h3 class="text-lg font-black mb-4 uppercase leading-tight">Личный контроль <br>Дениса</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Никаких случайных людей. Каждая герметизация, каждая копка проходит через мой контроль. Я отвечаю за результат именем компании.</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-3xl">
-                            <div class="bg-emerald-500/10 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                                <i data-lucide="maximize" class="text-emerald-500 w-6 h-6"></i>
-                            </div>
-                            <h3 class="text-lg font-black mb-4 uppercase leading-tight">Максимальный <br>охват услуг</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">От мелкого ремонта шва до масштабной копки септика манипулятором. У нас есть техника и люди для задачи любой сложности.</p>
-                        </div>
-                    </div>
-                </section>
-            `,
-            services: `
-                <section class="py-20 px-6 container mx-auto">
-                    <h2 class="text-4xl font-black mb-12 uppercase tracking-tighter">ПОЛНЫЙ СПЕКТР <span class="text-amber-500">УСЛУГ</span></h2>
-                    
-                    <div class="flex flex-wrap gap-2 mb-16 overflow-x-auto pb-4">
-                        <button onclick="showService('dig')" class="service-tab bg-amber-500 text-black px-8 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest transition">Копка колодцев</button>
-                        <button onclick="showService('clean')" class="service-tab bg-white/5 px-8 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest border border-white/10 transition">Чистка</button>
-                        <button onclick="showService('repair')" class="service-tab bg-white/5 px-8 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest border border-white/10 transition">Ремонт</button>
-                        <button onclick="showService('septic')" class="service-tab bg-white/5 px-8 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest border border-white/10 transition">Септики</button>
-                    </div>
-
-                    <!-- Копка (Максимально расширено) -->
-                    <div id="service-dig" class="service-content active">
-                        <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Services Preview -->
+                <section class="py-24 bg-[#0B111B]">
+                    <div class="container mx-auto px-6">
+                        <div class="flex justify-between items-end mb-12">
                             <div>
-                                <h3 class="text-3xl font-black mb-6 uppercase tracking-tighter">ПРОФЕССИОНАЛЬНАЯ КОПКА</h3>
-                                <p class="text-slate-400 mb-8 font-medium">Мы подбираем метод копки исходя из геологии вашего участка. Наша цель — добраться до чистого водоносного горизонта.</p>
-                                
+                                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-2">Наши Услуги</h2>
+                                <p class="text-slate-400">Полный цикл работ с водоснабжением</p>
+                            </div>
+                            <button onclick="router('services')" class="hidden md:flex items-center gap-2 text-[#C79A3F] font-bold uppercase text-xs tracking-widest hover:text-white transition">
+                                Все услуги <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <!-- Card 1 -->
+                            <div onclick="router('cleaning')" class="glass-card p-8 rounded-3xl cursor-pointer group">
+                                <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6 group-hover:bg-blue-500 group-hover:text-white transition duration-500">
+                                    <i data-lucide="sparkles" class="w-7 h-7"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition">Чистка колодцев</h3>
+                                <p class="text-sm text-slate-400 leading-relaxed mb-6">Мойка 400 бар, дезинфекция марганцовкой, донные щиты. Убираем плывуны и запахи.</p>
+                                <span class="text-[#C79A3F] font-bold text-lg">16 000 ₽</span>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div onclick="router('digging')" class="glass-card p-8 rounded-3xl cursor-pointer group">
+                                <div class="w-14 h-14 rounded-2xl bg-[#C79A3F]/10 flex items-center justify-center text-[#C79A3F] mb-6 group-hover:bg-[#C79A3F] group-hover:text-[#0F1724] transition duration-500">
+                                    <i data-lucide="shovel" class="w-7 h-7"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-[#C79A3F] transition">Копка колодцев</h3>
+                                <p class="text-sm text-slate-400 leading-relaxed mb-6">Ручная и машинная копка. Проходим сложные грунты. Кольца с замком. Договор.</p>
+                                <span class="text-[#C79A3F] font-bold text-lg">от 7 500 ₽</span>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div onclick="router('septic')" class="glass-card p-8 rounded-3xl cursor-pointer group">
+                                <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:bg-emerald-500 group-hover:text-white transition duration-500">
+                                    <i data-lucide="layout-grid" class="w-7 h-7"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition">Септики под ключ</h3>
+                                <p class="text-sm text-slate-400 leading-relaxed mb-6">Монтаж ЖБ колец, переливы, гидроизоляция. Партнерство с дилерами биостанций.</p>
+                                <span class="text-[#C79A3F] font-bold text-lg">по смете</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Our Works / Gallery Preview -->
+                <section class="py-24 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-[#C79A3F]/5 skew-x-12 blur-3xl -z-10"></div>
+                    <div class="container mx-auto px-6">
+                        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                            <div class="max-w-xl">
+                                <span class="text-[#C79A3F] font-bold uppercase tracking-widest text-xs mb-2 block">Портфолио</span>
+                                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-6">РЕАЛЬНЫЕ ОБЪЕКТЫ</h2>
+                                <p class="text-slate-400">Мы не используем стоковые фото. Все кадры сделаны на наших объектах в Московской области.</p>
+                            </div>
+                            <div class="flex gap-4">
+                                <button class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C79A3F] hover:border-[#C79A3F] hover:text-[#0F1724] transition"><i data-lucide="arrow-left"></i></button>
+                                <button class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C79A3F] hover:border-[#C79A3F] hover:text-[#0F1724] transition"><i data-lucide="arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Work 1 -->
+                            <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1590333746438-2834503f5573?q=80&w=800" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 transition-opacity p-8 flex flex-col justify-end">
+                                    <span class="text-[#C79A3F] text-xs font-bold uppercase tracking-widest mb-1">Московская область</span>
+                                    <h4 class="text-white font-bold text-lg">Чистка с заменой щита</h4>
+                                </div>
+                            </div>
+                            <!-- Work 2 -->
+                            <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1541944743827-e04aa6427c33?q=80&w=800" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 transition-opacity p-8 flex flex-col justify-end">
+                                    <span class="text-[#C79A3F] text-xs font-bold uppercase tracking-widest mb-1">Московская область</span>
+                                    <h4 class="text-white font-bold text-lg">Копка септика 3+2</h4>
+                                </div>
+                            </div>
+                            <!-- Work 3 -->
+                            <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 transition-opacity p-8 flex flex-col justify-end">
+                                    <span class="text-[#C79A3F] text-xs font-bold uppercase tracking-widest mb-1">Московская область</span>
+                                    <h4 class="text-white font-bold text-lg">Герметизация швов</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tools & Advantages -->
+                <section class="py-24 bg-[#0B111B]">
+                    <div class="container mx-auto px-6">
+                        <div class="grid lg:grid-cols-2 gap-16 items-center">
+                            <div>
+                                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-8">ТЕХНИЧЕСКОЕ <br><span class="text-[#C79A3F]">ПРЕВОСХОДСТВО</span></h2>
                                 <div class="space-y-8">
-                                    <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
-                                        <div class="flex justify-between items-center mb-4">
-                                            <h5 class="font-black text-amber-500 uppercase text-sm">Ручная копка</h5>
-                                            <span class="advantage-pill">Для сложных грунтов</span>
+                                    <div class="flex gap-5">
+                                        <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-[#C79A3F]">
+                                            <i data-lucide="zap" class="w-6 h-6"></i>
                                         </div>
-                                        <ul class="text-[11px] text-slate-300 space-y-2 uppercase font-bold tracking-tighter">
-                                            <li><i data-lucide="check" class="inline w-3 h-3 text-amber-500 mr-2"></i> Идеальная вертикальность шахты</li>
-                                            <li><i data-lucide="check" class="inline w-3 h-3 text-amber-500 mr-2"></i> Проходим любые камни и плывуны вручную</li>
-                                            <li><i data-lucide="check" class="inline w-3 h-3 text-amber-500 mr-2"></i> Работа в стесненных условиях (куда не проедет техника)</li>
-                                            <li><i data-lucide="check" class="inline w-3 h-3 text-amber-500 mr-2"></i> Максимально плотная посадка колец без зазоров</li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
-                                        <div class="flex justify-between items-center mb-4">
-                                            <h5 class="font-black text-blue-500 uppercase text-sm">Машинное бурение</h5>
-                                            <span class="advantage-pill">Скорость и мощь</span>
-                                        </div>
-                                        <ul class="text-[11px] text-slate-300 space-y-2 uppercase font-bold tracking-tighter">
-                                            <li><i data-lucide="zap" class="inline w-3 h-3 text-blue-500 mr-2"></i> Скорость: колодец за 3-5 часов</li>
-                                            <li><i data-lucide="zap" class="inline w-3 h-3 text-blue-500 mr-2"></i> Огромная сила вращения для твердых пород</li>
-                                            <li><i data-lucide="zap" class="inline w-3 h-3 text-blue-500 mr-2"></i> Минимум мусора и грунта вокруг шахты</li>
-                                            <li><i data-lucide="zap" class="inline w-3 h-3 text-blue-500 mr-2"></i> Глубина бурения до 30 метров</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-amber-500/5 p-10 rounded-[3rem] border border-amber-500/10">
-                                <h4 class="text-xl font-black mb-6 uppercase">Важные нюансы копки</h4>
-                                <p class="text-sm text-slate-400 mb-6 leading-relaxed">
-                                    Мы всегда учитываем сезонность. Лучшее время — засуха или морозы, когда уровень ГВ минимален. Мы делаем обязательную обсыпку крупнозернистым песком или ПГС для защиты от пучения грунта. <br><br>
-                                    <strong>Для септиков 1.5 метра:</strong> работаем только вручную, так как это требует ювелирной точности при установке тяжелых колец манипулятором.
-                                </p>
-                                <button onclick="router('contacts')" class="w-full bg-amber-500 text-black font-black py-4 rounded-xl uppercase text-xs tracking-widest">Заказать разведку</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Чистка (Твой регламент) -->
-                    <div id="service-clean" class="service-content">
-                        <div class="grid lg:grid-cols-2 gap-16">
-                            <div>
-                                <h3 class="text-3xl font-black mb-6 uppercase tracking-tighter">ЧИСТКА КОЛОДЦА (16 000 ₽)</h3>
-                                <p class="text-slate-400 mb-8">Это комплексная услуга. Мы не делим её на этапы за доплату — мы делаем всё сразу.</p>
-                                <div class="grid gap-4">
-                                    <div class="p-6 bg-white/5 rounded-2xl border border-white/5 flex gap-4 items-center">
-                                        <i data-lucide="droplets" class="text-amber-500 w-8 h-8"></i>
                                         <div>
-                                            <h6 class="font-black uppercase text-xs">Полная откачка</h6>
-                                            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Мощные дренажники до 60 кубов в час.</p>
+                                            <h4 class="text-white font-bold text-lg mb-2">Мойка 400 Бар</h4>
+                                            <p class="text-slate-400 text-sm leading-relaxed">Сбиваем вековой налет и слизь со стенок колец. Обычный "Керхер" не справится с такой задачей.</p>
                                         </div>
                                     </div>
-                                    <div class="p-6 bg-white/5 rounded-2xl border border-white/5 flex gap-4 items-center">
-                                        <i data-lucide="waves" class="text-blue-500 w-8 h-8"></i>
+                                    <div class="flex gap-5">
+                                        <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-[#C79A3F]">
+                                            <i data-lucide="waves" class="w-6 h-6"></i>
+                                        </div>
                                         <div>
-                                            <h6 class="font-black uppercase text-xs">Мойка 400 Бар</h6>
-                                            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Входит в стоимость. Отмываем всё до блеска.</p>
+                                            <h4 class="text-white font-bold text-lg mb-2">Насосы Belamos</h4>
+                                            <p class="text-slate-400 text-sm leading-relaxed">Мощность 2200 Вт и 1500 Вт. Прокачиваем колодец до чистой воды, убирая всю муть со дна.</p>
                                         </div>
                                     </div>
-                                    <div class="p-6 bg-white/5 rounded-2xl border border-white/5 flex gap-4 items-center">
-                                        <i data-lucide="trash-2" class="text-red-500 w-8 h-8"></i>
+                                    <div class="flex gap-5">
+                                        <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-[#C79A3F]">
+                                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                                        </div>
                                         <div>
-                                            <h6 class="font-black uppercase text-xs">Чистка дна</h6>
-                                            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Ручная выемка грязи, ила и мусора.</p>
+                                            <h4 class="text-white font-bold text-lg mb-2">Дезинфекция</h4>
+                                            <p class="text-slate-400 text-sm leading-relaxed">Используем растворы марганцовки для обеззараживания шахты при чистке. Безопасно и эффективно.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Ремонт -->
-                    <div id="service-repair" class="service-content">
-                        <div class="grid lg:grid-cols-2 gap-16">
-                            <div>
-                                <h3 class="text-3xl font-black mb-6 uppercase tracking-tighter">РЕМОНТ И ГЕРМЕТИЗАЦИЯ</h3>
-                                <div class="bg-blue-500/5 p-8 rounded-3xl border border-blue-500/20 mb-8">
-                                    <h4 class="font-black uppercase text-sm mb-4">Наши возможности по ремонту:</h4>
-                                    <ul class="space-y-4 text-xs font-bold uppercase tracking-widest text-slate-300">
-                                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-blue-500 w-4 h-4"></i> Правка смещенных колец</li>
-                                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-blue-500 w-4 h-4"></i> Замена треснувших колец (при возможности)</li>
-                                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-blue-500 w-4 h-4"></i> Гидроизоляция швов (3 000 ₽ за шов)</li>
-                                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-blue-500 w-4 h-4"></i> Промазка монтажных отверстий</li>
-                                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-blue-500 w-4 h-4"></i> Скобирование (нержавейка)</li>
+                            <div class="relative">
+                                <div class="absolute inset-0 bg-[#C79A3F] blur-[100px] opacity-10"></div>
+                                <div class="relative bg-[#161E2E] border border-white/10 rounded-3xl p-10">
+                                    <h3 class="text-2xl font-bold text-white mb-6 uppercase">Наши гарантии</h3>
+                                    <ul class="space-y-4 text-slate-300">
+                                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-[#C79A3F]"></i> Фиксированная цена в договоре</li>
+                                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-[#C79A3F]"></i> Гарантия на швы 1 год</li>
+                                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-[#C79A3F]"></i> Работаем в любую погоду</li>
+                                        <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-[#C79A3F]"></i> Никакой грязи на участке</li>
                                     </ul>
-                                </div>
-                                <p class="text-sm text-slate-500 leading-relaxed italic">Мы используем современные составы для гидроизоляции. Никакого дешевого цемента, который вымывается через месяц. Только надежные гидропломбы.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Септики -->
-                    <div id="service-septic" class="service-content">
-                        <div class="grid lg:grid-cols-2 gap-16">
-                            <div>
-                                <h3 class="text-3xl font-black mb-6 uppercase tracking-tighter">СЕПТИКИ ИЗ КОЛЕЦ</h3>
-                                <p class="text-slate-400 mb-8">Самый надежный септик — это бетонный септик. Мы строим системы переливов, которые работают вечно.</p>
-                                <div class="space-y-6">
-                                    <div class="p-8 border border-white/5 bg-white/5 rounded-3xl">
-                                        <h5 class="font-black uppercase text-xs mb-4 text-emerald-500">Стандарт монтажа:</h5>
-                                        <ul class="space-y-3 text-[10px] font-black uppercase text-slate-400">
-                                            <li>— Копка под 1.5м кольца ТОЛЬКО ВРУЧНУЮ</li>
-                                            <li>— Работа манипулятора (никаких опусканий "на веревке")</li>
-                                            <li>— Полная промазка всех швов и вводов труб</li>
-                                            <li>— Обустройство системы перелива (тройники, углы)</li>
-                                            <li>— Финальная гидроизоляция стыков</li>
-                                        </ul>
+                                    <div class="mt-8 pt-8 border-t border-white/10">
+                                        <p class="text-sm text-slate-400 italic">"Мы не раскрываем шатры и не пьем чай часами. Мы приезжаем работать."</p>
+                                        <div class="mt-4 flex items-center gap-3">
+                                            <div class="w-10 h-10 bg-slate-700 rounded-full"></div>
+                                            <div>
+                                                <p class="text-white font-bold">Денис</p>
+                                                <p class="text-xs text-[#C79A3F]">Основатель</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+
+                <!-- CTA Section -->
+                <section class="py-24 container mx-auto px-6 text-center">
+                    <div class="max-w-4xl mx-auto bg-gradient-to-br from-[#1A2332] to-[#0F1724] border border-white/10 rounded-[3rem] p-12 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-[#C79A3F]/10 rounded-full blur-[80px]"></div>
+                        
+                        <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-6 relative z-10">ГОТОВЫ ЗАКАЗАТЬ?</h2>
+                        <p class="text-slate-400 mb-10 text-lg relative z-10">Свяжитесь с нами прямо сейчас для бесплатной консультации и расчета стоимости.</p>
+                        
+                        <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+                            <button onclick="openModal()" class="bg-[#C79A3F] text-[#0F1724] px-10 py-5 rounded-xl font-bold hover:bg-white transition shadow-lg text-sm uppercase tracking-widest">
+                                Оставить заявку
+                            </button>
+                            <a href="tel:+79816666670" class="bg-white/5 border border-white/10 text-white px-10 py-5 rounded-xl font-bold hover:bg-white/10 transition text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                                <i data-lucide="phone" class="w-4 h-4"></i> 8 (981) 666-66-70
+                            </a>
+                        </div>
+                    </div>
+                </section>
             `,
-            works: `
-                <section class="py-20 px-6 container mx-auto">
-                    <h2 class="text-4xl font-black mb-4 uppercase tracking-tighter text-center">НАШИ <span class="text-amber-500">РАБОТЫ</span></h2>
-                    <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] text-center mb-16">Качество, за которое мы отвечаем репутацией</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        ${Array.from({length: 8}).map((_, i) => `
-                            <div class="group cursor-pointer">
-                                <div class="relative overflow-hidden rounded-3xl bg-white/5 aspect-square border border-white/5 group-hover:border-amber-500 transition duration-500">
-                                    <div class="absolute inset-0 flex items-center justify-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500">
-                                        <img src="https://images.unsplash.com/photo-1590333746438-2834503f5573?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="absolute bottom-6 left-6">
-                                        <span class="text-[9px] font-black uppercase text-white bg-black/50 px-3 py-1 rounded-full backdrop-blur">Объект #${400+i}</span>
-                                    </div>
+            cleaning: `
+                <section class="pt-32 pb-20 px-6 container mx-auto">
+                    <div class="max-w-4xl mx-auto text-center mb-16">
+                        <span class="text-[#C79A3F] font-bold uppercase tracking-[0.3em] text-xs">Услуга №1</span>
+                        <h1 class="text-4xl md:text-6xl font-heading font-bold mt-4 mb-6">ЧИСТКА КОЛОДЦЕВ</h1>
+                        <p class="text-slate-400 text-lg">Комплексное обслуживание питьевых и дренажных колодцев. Устраняем запахи, муть, плывуны.</p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-16 items-start">
+                        <div class="space-y-8">
+                            <h3 class="text-2xl font-bold text-white">Как мы работаем:</h3>
+                            <div class="relative pl-8 border-l border-[#C79A3F]/30 space-y-12">
+                                <div class="relative">
+                                    <span class="absolute -left-[39px] top-0 w-5 h-5 rounded-full bg-[#C79A3F] border-4 border-[#0F1724]"></span>
+                                    <h4 class="text-xl font-bold text-white mb-2">1. Диагностика и Откачка</h4>
+                                    <p class="text-slate-400 text-sm">Проверяем шахту на целостность. Откачиваем воду мощными насосами Belamos.</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[39px] top-0 w-5 h-5 rounded-full bg-[#0F1724] border-2 border-[#C79A3F]"></span>
+                                    <h4 class="text-xl font-bold text-white mb-2">2. Мойка 400 Бар</h4>
+                                    <p class="text-slate-400 text-sm">Смываем слизь, мох и органику со стенок под высоким давлением.</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[39px] top-0 w-5 h-5 rounded-full bg-[#0F1724] border-2 border-[#C79A3F]"></span>
+                                    <h4 class="text-xl font-bold text-white mb-2">3. Чистка дна и Дезинфекция</h4>
+                                    <p class="text-slate-400 text-sm">Вынимаем ил, песок и мусор вручную. Обрабатываем шахту раствором марганцовки.</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[39px] top-0 w-5 h-5 rounded-full bg-[#0F1724] border-2 border-[#C79A3F]"></span>
+                                    <h4 class="text-xl font-bold text-white mb-2">4. Гидроизоляция и Сдача</h4>
+                                    <p class="text-slate-400 text-sm">Промазываем швы гидропломбами. Устанавливаем донный фильтр (при необходимости).</p>
                                 </div>
                             </div>
-                        `).join('')}
+                        </div>
+
+                        <div class="bg-[#161E2E] p-10 rounded-3xl border border-white/5 sticky top-24">
+                            <h3 class="text-2xl font-bold text-white mb-6">Прайс на чистку</h3>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex justify-between border-b border-white/5 pb-4">
+                                    <span class="text-slate-300">Чистка колодца (комплекс)</span>
+                                    <span class="text-[#C79A3F] font-bold">16 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/5 pb-4">
+                                    <span class="text-slate-300">Дезинфекция</span>
+                                    <span class="text-[#C79A3F] font-bold">входит в цену</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/5 pb-4">
+                                    <span class="text-slate-300">Донный щит (Осина)</span>
+                                    <span class="text-[#C79A3F] font-bold">от 4 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between pb-4">
+                                    <span class="text-slate-300">Шунгит + Галька</span>
+                                    <span class="text-[#C79A3F] font-bold">от 3 500 ₽</span>
+                                </div>
+                            </div>
+                            <button onclick="openModal()" class="w-full bg-[#C79A3F] text-[#0F1724] py-4 rounded-xl font-bold hover:bg-white transition uppercase tracking-widest text-sm">Заказать услугу</button>
+                        </div>
                     </div>
                 </section>
             `,
             price: `
-                <section class="py-20 px-6 container mx-auto max-w-4xl">
-                    <h2 class="text-4xl font-black mb-16 uppercase tracking-tighter text-center">Прайс-лист <span class="text-amber-500">2026</span></h2>
+                <section class="pt-32 pb-20 px-6 container mx-auto">
+                    <h1 class="text-4xl md:text-6xl font-heading font-bold text-center mb-16">ПРАЙС-ЛИСТ 2026</h1>
                     
-                    <div class="space-y-8">
-                        <!-- Основное -->
-                        <div class="glass-card p-10 rounded-[2.5rem] border-l-4 border-l-amber-500">
-                            <h4 class="text-amber-500 font-black uppercase text-[10px] tracking-widest mb-6">Комплексная очистка</h4>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Очистка колодца (полный цикл)</span>
-                                <span class="font-black text-xl">16 000 ₽</span>
+                    <div class="max-w-4xl mx-auto space-y-12">
+                        <!-- Чистка -->
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#C79A3F] mb-6 border-b border-[#C79A3F]/30 pb-2">Обслуживание колодцев</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Комплексная чистка колодца (откачка, мойка, дно)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">16 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Дезинфекция марганцовкой / хлором</span>
+                                    <span class="font-bold text-white whitespace-nowrap">2 500 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Прокачка колодца до чистой воды (доп. насос)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">2 000 ₽</span>
+                                </div>
                             </div>
-                            <p class="text-[9px] text-slate-500 mt-2 uppercase font-black italic tracking-widest leading-relaxed">Включает: откачку, мойку шахты (400 бар), выемку ила, дезинфекцию.</p>
                         </div>
 
                         <!-- Ремонт -->
-                        <div class="glass-card p-10 rounded-[2.5rem] border-l-4 border-l-blue-500">
-                            <h4 class="text-blue-500 font-black uppercase text-[10px] tracking-widest mb-6">Ремонтные работы</h4>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Герметизация одного шва</span>
-                                <span class="font-black text-xl">3 000 ₽</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#C79A3F] mb-6 border-b border-[#C79A3F]/30 pb-2">Ремонт и Гидроизоляция</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Герметизация 1 шва (гидропломба)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">3 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Скобирование (3 скобы на шов)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">1 500 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Правка смещения кольца</span>
+                                    <span class="font-bold text-white whitespace-nowrap">от 5 000 ₽</span>
+                                </div>
+                                 <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Ремонт разрывного шва (>4 см)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">6 000 ₽</span>
+                                </div>
                             </div>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Скобирование одного шва (3 скобы)</span>
-                                <span class="font-black text-xl">1 500 ₽</span>
-                            </div>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Промазка монтажных отверстий</span>
-                                <span class="font-black text-xl">2 000 ₽</span>
-                            </div>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Правка/выравнивание колец</span>
-                                <span class="font-black text-xl text-slate-500 italic">от 5 000 ₽</span>
+                        </div>
+
+                        <!-- Материалы -->
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#C79A3F] mb-6 border-b border-[#C79A3F]/30 pb-2">Донные фильтры и Материалы</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Донный щит (Осина) с установкой</span>
+                                    <span class="font-bold text-white whitespace-nowrap">8 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Донный щит (Лиственница) с установкой</span>
+                                    <span class="font-bold text-white whitespace-nowrap">12 000 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Шунгит + Галька (комплект)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">4 500 ₽</span>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Копка -->
-                        <div class="glass-card p-10 rounded-[2.5rem] border-l-4 border-l-emerald-500">
-                            <h4 class="text-emerald-500 font-black uppercase text-[10px] tracking-widest mb-6">Копка и септики</h4>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Копка кольца (работа + материал)</span>
-                                <span class="font-black text-xl">от 7 500 ₽</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#C79A3F] mb-6 border-b border-[#C79A3F]/30 pb-2">Копка и Септики</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Копка колодца (кольцо + работа + материал)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">от 8 500 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Копка траншеи (за метр)</span>
+                                    <span class="font-bold text-white whitespace-nowrap">от 1 800 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                                    <span class="font-medium">Установка септика под ключ</span>
+                                    <span class="font-bold text-white whitespace-nowrap">Смета</span>
+                                </div>
                             </div>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Копка кольца (только работа)</span>
-                                <span class="font-black text-xl text-slate-500">договорная</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <button onclick="window.print()" class="text-slate-500 hover:text-white underline text-sm">Скачать прайс в PDF</button>
+                    </div>
+                </section>
+            `,
+            about: `
+                <section class="pt-32 pb-20 px-6 container mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <span class="text-[#C79A3F] font-bold uppercase tracking-[0.3em] text-xs">Наша миссия</span>
+                            <h1 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-8">МЫ НЕ КАТАЕМ ВАТУ.<br>МЫ ДЕЛАЕМ ВОДУ ЧИСТОЙ.</h1>
+                            <div class="text-slate-300 space-y-6 text-lg leading-relaxed">
+                                <p>Меня зовут <strong class="text-white">Денис</strong>. Я основал WELLS-MO с простой целью: дать людям в Московской области сервис уровня, которого здесь никогда не было.</p>
+                                <p>Пока другие "мастера" боятся дождя, переносят заказы и накручивают цены на месте — мы работаем. У нас профессиональное оборудование, молодые и сильные парни, и четкое понимание технологий.</p>
+                                <ul class="space-y-3 mt-4">
+                                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-[#C79A3F]"></i> Бережное отношение к участку</li>
+                                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-[#C79A3F]"></i> Своя техника и генераторы</li>
+                                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-[#C79A3F]"></i> Никаких посредников</li>
+                                </ul>
                             </div>
-                            <div class="price-row">
-                                <span class="text-sm font-bold uppercase tracking-tighter">Донный фильтр (комплект)</span>
-                                <span class="font-black text-xl">4 500 ₽</span>
-                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-[#C79A3F] blur-[100px] opacity-20"></div>
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1000" class="relative rounded-3xl shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition duration-700">
                         </div>
                     </div>
                 </section>
             `,
             contacts: `
-                <section class="py-32 px-6 container mx-auto text-center">
-                    <h2 class="text-5xl md:text-7xl font-black mb-12 uppercase tracking-tighter">СВЯЗЬ С <span class="text-amber-500 text-shadow-xl">ДЕНИСОМ</span></h2>
-                    <p class="text-slate-400 text-lg mb-16 max-w-2xl mx-auto font-medium leading-relaxed">Работаем по всей Московской области. Звоните напрямую, обсудим ваш объект, сделаем предварительную оценку по фото или видео.</p>
+                <section class="pt-32 pb-20 px-6 container mx-auto text-center min-h-[80vh] flex flex-col justify-center">
+                    <h1 class="text-4xl md:text-6xl font-heading font-bold mb-8">СВЯЖИТЕСЬ С НАМИ</h1>
+                    <p class="text-xl text-slate-400 mb-12">Работаем без выходных по всей Московской Области</p>
                     
-                    <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                        <a href="tel:+79816666670" class="glass-card p-10 rounded-3xl hover:bg-amber-500 hover:text-black transition group">
-                            <i data-lucide="phone" class="w-8 h-8 mx-auto mb-4 group-hover:scale-110 transition"></i>
-                            <span class="text-xs font-black uppercase tracking-widest">Позвонить прямо сейчас</span>
+                    <a href="tel:+79816666670" class="text-4xl md:text-6xl font-heading font-black text-[#C79A3F] hover:text-white transition mb-12 block">8 (981) 666-66-70</a>
+                    
+                    <div class="flex flex-col md:flex-row justify-center gap-6">
+                        <a href="#" class="flex items-center justify-center gap-3 bg-[#24A1DE] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#1b8bc2] transition">
+                            <i data-lucide="send" class="w-5 h-5"></i> Telegram
                         </a>
-                        <a href="https://t.me/nenaity" target="_blank" class="glass-card p-10 rounded-3xl hover:bg-sky-500 hover:text-black transition group">
-                            <i data-lucide="send" class="w-8 h-8 mx-auto mb-4 group-hover:scale-110 transition"></i>
-                            <span class="text-xs font-black uppercase tracking-widest">Telegram</span>
+                        <a href="#" class="flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#20bd5a] transition">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
                         </a>
-                        <a href="https://wa.me/79816666670" target="_blank" class="glass-card p-10 rounded-3xl hover:bg-emerald-500 hover:text-black transition group">
-                            <i data-lucide="message-circle" class="w-8 h-8 mx-auto mb-4 group-hover:scale-110 transition"></i>
-                            <span class="text-xs font-black uppercase tracking-widest">WhatsApp</span>
-                        </a>
+                    </div>
+                </section>
+            `,
+            works: `
+                <section class="pt-32 pb-20 px-6 container mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-heading font-bold mb-12 text-center">ГАЛЕРЕЯ НАШИХ РАБОТ</h1>
+                    
+                    <!-- Filters -->
+                    <div class="flex flex-wrap justify-center gap-4 mb-12">
+                        <button class="px-6 py-2 rounded-full border border-[#C79A3F] text-[#C79A3F] font-bold">Все</button>
+                        <button class="px-6 py-2 rounded-full border border-white/20 text-slate-400 hover:border-white transition">Чистка</button>
+                        <button class="px-6 py-2 rounded-full border border-white/20 text-slate-400 hover:border-white transition">Копка</button>
+                        <button class="px-6 py-2 rounded-full border border-white/20 text-slate-400 hover:border-white transition">Септики</button>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Item 1 -->
+                        <div class="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-gray-800">
+                            <img src="https://images.unsplash.com/photo-1615811361269-6c873138358e?q=80&w=800" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                                <h4 class="text-white font-bold text-lg">Копка в плывуне</h4>
+                                <p class="text-[#C79A3F] text-sm">Московская область, 2023</p>
+                            </div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-gray-800">
+                            <img src="https://images.unsplash.com/photo-1590333746438-2834503f5573?q=80&w=800" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                                <h4 class="text-white font-bold text-lg">Чистка + Дезинфекция</h4>
+                                <p class="text-[#C79A3F] text-sm">Московская область, 2023</p>
+                            </div>
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-gray-800">
+                            <img src="https://images.unsplash.com/photo-1541944743827-e04aa6427c33?q=80&w=800" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                                <h4 class="text-white font-bold text-lg">Монтаж септика</h4>
+                                <p class="text-[#C79A3F] text-sm">Московская область, 2024</p>
+                            </div>
+                        </div>
+                         <!-- Item 4 -->
+                        <div class="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-gray-800">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                                <h4 class="text-white font-bold text-lg">Замена донного щита</h4>
+                                <p class="text-[#C79A3F] text-sm">Московская область</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `,
+            digging: `
+                <section class="pt-32 pb-20 px-6 container mx-auto">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-8">КОПКА КОЛОДЦЕВ ПОД КЛЮЧ</h1>
+                        <p class="text-xl text-slate-400 mb-12">Ручная копка и машинное бурение. Подбираем метод исходя из особенностей вашего грунта.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 mb-16">
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                                <h3 class="text-2xl font-bold text-[#C79A3F] mb-4">Ручная копка</h3>
+                                <ul class="space-y-3 text-slate-300">
+                                    <li>• Идеально для участков с ландшафтным дизайном</li>
+                                    <li>• Возможность проходки сложных плывунов</li>
+                                    <li>• Аккуратная выемка грунта</li>
+                                    <li>• Копка ремонтных колец меньшего диаметра</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                                <h3 class="text-2xl font-bold text-blue-400 mb-4">Машинное бурение</h3>
+                                <ul class="space-y-3 text-slate-300">
+                                    <li>• Скорость: колодец за 1 день</li>
+                                    <li>• Идеально ровная шахта</li>
+                                    <li>• Глубина бурения до 20+ колец</li>
+                                    <li>• Требуется заезд для техники</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-6">Материалы и гарантии</h3>
+                        <p class="text-slate-400 leading-relaxed mb-8">
+                            Мы используем только армированные ЖБ кольца заводского производства (ГОСТ). Все кольца имеют замковое соединение, что предотвращает смещение шахты. На все работы предоставляется гарантия по договору. При встрече сложного грунта (камень, плывун) цена оговаривается индивидуально, но остается честной.
+                        </p>
+                        
+                        <button onclick="openModal()" class="bg-[#C79A3F] text-[#0F1724] px-8 py-4 rounded-xl font-bold hover:bg-white transition">Заказать расчет копки</button>
+                    </div>
+                </section>
+            `,
+            septic: `
+                <section class="pt-32 pb-20 px-6 container mx-auto">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-8">СЕПТИКИ ИЗ БЕТОННЫХ КОЛЕЦ</h1>
+                        <p class="text-xl text-slate-400 mb-12">Надежная и недорогая автономная канализация для частного дома и дачи.</p>
+                        
+                        <div class="space-y-8 mb-12">
+                            <div class="glass-card p-8 rounded-3xl">
+                                <h3 class="text-xl font-bold text-white mb-4">Вариант 1: Однокамерный</h3>
+                                <p class="text-slate-400 mb-4">Для дач с сезонным проживанием.</p>
+                                <span class="text-[#C79A3F] font-bold">Бюджетное решение</span>
+                            </div>
+                            <div class="glass-card p-8 rounded-3xl border border-[#C79A3F]/30">
+                                <h3 class="text-xl font-bold text-white mb-4">Вариант 2: Переливной (2-3 колодца)</h3>
+                                <p class="text-slate-400 mb-4">Идеально для ПМЖ. Высокая степень очистки, отсутствие запаха, редкая откачка.</p>
+                                <span class="text-[#C79A3F] font-bold">Рекомендуем!</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-6">Что входит в монтаж?</h3>
+                        <ul class="space-y-4 text-slate-300 mb-12">
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500"></i> Доставка колец и материалов</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500"></i> Копка шахт и траншей под трубы</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500"></i> Монтаж колец, крышек, люков</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500"></i> Герметизация швов и вводов труб</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500"></i> Подключение к дому (по желанию)</li>
+                        </ul>
+
+                        <button onclick="openModal()" class="bg-[#C79A3F] text-[#0F1724] px-8 py-4 rounded-xl font-bold hover:bg-white transition">Рассчитать смету септика</button>
+                    </div>
+                </section>
+            `,
+            repair: `
+                <section class="pt-32 pb-20 px-6 container mx-auto">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-8">РЕМОНТ И УГЛУБЛЕНИЕ КОЛОДЦЕВ</h1>
+                        <p class="text-xl text-slate-400 mb-12">Спасаем старые и проблемные колодцы. Герметизация, скрепление колец, правка шахты.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 mb-12">
+                            <div class="glass-card p-8 rounded-3xl">
+                                <h3 class="text-xl font-bold text-white mb-4">Гидроизоляция швов</h3>
+                                <p class="text-slate-400">Используем гидропломбы мгновенного схватывания для остановки течей и проникновения грунтовки.</p>
+                            </div>
+                            <div class="glass-card p-8 rounded-3xl">
+                                <h3 class="text-xl font-bold text-white mb-4">Скобирование</h3>
+                                <p class="text-slate-400">Скрепление колец металлическими скобами (3 шт на шов) для предотвращения разрывов шахты при пучении грунта.</p>
+                            </div>
+                            <div class="glass-card p-8 rounded-3xl">
+                                <h3 class="text-xl font-bold text-white mb-4">Углубление</h3>
+                                <p class="text-slate-400">Если вода ушла, мы углубим колодец ремонтными кольцами меньшего диаметра (0.7м или 0.8м).</p>
+                            </div>
+                        </div>
+                        <button onclick="openModal()" class="bg-[#C79A3F] text-[#0F1724] px-8 py-4 rounded-xl font-bold hover:bg-white transition">Вызвать мастера на диагностику</button>
                     </div>
                 </section>
             `
         };
 
-        function toggleMenu() {
+        // Router Function
+        function router(pageName) {
+            const app = document.getElementById('app');
             const overlay = document.getElementById('nav-overlay');
-            const isActive = overlay.classList.toggle('active');
-            document.body.style.overflow = isActive ? 'hidden' : 'auto';
-        }
-
-        function router(page) {
-            const contentDiv = document.getElementById('app-content');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const header = document.getElementById('main-header');
             
-            const overlay = document.getElementById('nav-overlay');
-            if (overlay.classList.contains('active')) toggleMenu();
+            // Scroll to top
+            window.scrollTo(0, 0);
 
-            contentDiv.innerHTML = content[page] || content.home;
+            // Hide menu if open
+            if (overlay.classList.contains('active')) {
+                toggleMenu();
+            }
+
+            // Set Content
+            if (content[pageName]) {
+                app.innerHTML = `<div class="fade-in-up">${content[pageName]}</div>`;
+            } else {
+                app.innerHTML = `<div class="fade-in-up">${content['home']}</div>`;
+            }
+
+            // Re-initialize icons for new content
             lucide.createIcons();
         }
 
-        function showService(type) {
-            document.querySelectorAll('.service-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.service-tab').forEach(btn => {
-                btn.classList.remove('bg-amber-500', 'text-black');
-                btn.classList.add('bg-white/5', 'text-white');
-            });
-
-            const target = document.getElementById('service-' + type);
-            if(target) {
-                target.classList.add('active');
-                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const overlay = document.getElementById('nav-overlay');
+            const body = document.body;
+            overlay.classList.toggle('active');
+            if (overlay.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
             }
-
-            const tabs = document.querySelectorAll('.service-tab');
-            tabs.forEach(tab => {
-                const txt = tab.innerText.toLowerCase();
-                if ((type === 'dig' && txt.includes('копка')) || 
-                    (type === 'clean' && txt.includes('чистка')) || 
-                    (type === 'repair' && txt.includes('ремонт')) || 
-                    (type === 'septic' && txt.includes('септики'))) {
-                    tab.classList.remove('bg-white/5', 'text-white');
-                    tab.classList.add('bg-amber-500', 'text-black');
-                }
-            });
         }
 
+        // Modal Functions
+        function openModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             router('home');
+            lucide.createIcons();
         });
+
     </script>
 </body>
 </html>
