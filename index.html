@@ -65,7 +65,7 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        /* Fullscreen Navigation Overlay */
+        /* Fullscreen Navigation Overlay with 3D Effects */
         #nav-overlay {
             position: fixed;
             inset: 0;
@@ -77,7 +77,9 @@
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+            perspective: 1000px;
+            transform-style: preserve-3d;
         }
 
         #nav-overlay.active {
@@ -85,25 +87,86 @@
             visibility: visible;
         }
 
-        /* Staggered Menu Animation */
+        /* 3D Container for menu items */
+        #nav-overlay nav {
+            transform-style: preserve-3d;
+            transform: rotateX(15deg) translateZ(-200px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #nav-overlay.active nav {
+            transform: rotateX(0deg) translateZ(0);
+            opacity: 1;
+        }
+
+        /* Staggered 3D Menu Animation */
         #nav-overlay nav button {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.5s ease;
+            transform: translateZ(-100px) rotateY(-15deg) translateX(-50px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: left center;
         }
 
         #nav-overlay.active nav button {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateZ(0) rotateY(0deg) translateX(0);
         }
 
-        /* Delay for each item */
+        /* Hover 3D effect for menu items */
+        #nav-overlay nav button:hover {
+            transform: translateZ(30px) scale(1.05) !important;
+            text-shadow: 0 10px 30px rgba(199, 154, 63, 0.5);
+        }
+
+        /* Delay for each item with 3D cascade */
         #nav-overlay.active nav button:nth-child(1) { transition-delay: 0.1s; }
-        #nav-overlay.active nav button:nth-child(2) { transition-delay: 0.15s; }
-        #nav-overlay.active nav button:nth-child(3) { transition-delay: 0.2s; }
-        #nav-overlay.active nav button:nth-child(4) { transition-delay: 0.25s; }
-        #nav-overlay.active nav button:nth-child(5) { transition-delay: 0.3s; }
-        #nav-overlay.active nav button:nth-child(6) { transition-delay: 0.35s; }
+        #nav-overlay.active nav button:nth-child(2) { transition-delay: 0.18s; }
+        #nav-overlay.active nav button:nth-child(3) { transition-delay: 0.26s; }
+        #nav-overlay.active nav button:nth-child(4) { transition-delay: 0.34s; }
+        #nav-overlay.active nav button:nth-child(5) { transition-delay: 0.42s; }
+        #nav-overlay.active nav button:nth-child(6) { transition-delay: 0.50s; }
+
+        /* 3D Floating particles effect in background */
+        #nav-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(199, 154, 63, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(199, 154, 63, 0.05) 0%, transparent 50%);
+            transform: translateZ(-100px);
+            pointer-events: none;
+        }
+
+        /* Close button 3D effect */
+        #nav-overlay .close-btn-3d {
+            transform: translateZ(50px);
+            transition: all 0.3s ease;
+        }
+
+        #nav-overlay .close-btn-3d:hover {
+            transform: translateZ(80px) rotate(90deg);
+            background: rgba(199, 154, 63, 0.2);
+        }
+
+        /* Menu closing animation */
+        #nav-overlay.closing {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        #nav-overlay.closing nav {
+            transform: rotateX(-15deg) translateZ(-200px) scale(0.9);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        #nav-overlay.closing nav button {
+            transform: translateZ(-100px) rotateY(15deg) translateX(50px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
 
         .menu-link-item {
             font-family: 'Montserrat', sans-serif;
@@ -196,18 +259,18 @@
         </div>
     </header>
 
-    <!-- Fullscreen Menu Overlay -->
+    <!-- Fullscreen Menu Overlay with 3D -->
     <div id="nav-overlay">
-        <button class="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition group" onclick="toggleMenu()">
-            <i data-lucide="x" class="w-10 h-10 text-white/50 group-hover:text-white transition"></i>
+        <button class="close-btn-3d absolute top-6 right-6 p-3 rounded-full border border-white/10 hover:border-[#C79A3F]/50 transition group" onclick="toggleMenu()">
+            <i data-lucide="x" class="w-8 h-8 text-white/50 group-hover:text-[#C79A3F] transition"></i>
         </button>
-        <nav class="flex flex-col items-center justify-center h-full">
-            <button onclick="router('home'); toggleMenu()" class="menu-link-item active-page">Главная</button>
-            <button onclick="router('cleaning'); toggleMenu()" class="menu-link-item">Чистка</button>
-            <button onclick="router('digging'); toggleMenu()" class="menu-link-item">Копка</button>
-            <button onclick="router('septic'); toggleMenu()" class="menu-link-item">Септики</button>
-            <button onclick="router('price'); toggleMenu()" class="menu-link-item">Цены</button>
-            <button onclick="router('contacts'); toggleMenu()" class="menu-link-item text-[#C79A3F]!important opacity-100!important mt-4 border-b-2 border-[#C79A3F]">Контакты</button>
+        <nav class="flex flex-col items-center justify-center h-full transform-gpu">
+            <button onclick="router('home')" class="menu-link-item active-page">Главная</button>
+            <button onclick="router('cleaning')" class="menu-link-item">Чистка</button>
+            <button onclick="router('digging')" class="menu-link-item">Копка</button>
+            <button onclick="router('septic')" class="menu-link-item">Септики</button>
+            <button onclick="router('price')" class="menu-link-item">Цены</button>
+            <button onclick="router('contacts')" class="menu-link-item text-[#C79A3F] mt-4 border-b-2 border-[#C79A3F]" style="opacity: 1 !important;">Контакты</button>
         </nav>
     </div>
 
@@ -877,17 +940,35 @@
             lucide.createIcons();
         }
 
-        // Toggle Mobile Menu
+        // Toggle Menu with 3D Animation
         function toggleMenu() {
             const overlay = document.getElementById('nav-overlay');
             const body = document.body;
-            overlay.classList.toggle('active');
+
             if (overlay.classList.contains('active')) {
-                body.style.overflow = 'hidden';
+                // Close menu with animation
+                overlay.classList.add('closing');
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    overlay.classList.remove('closing');
+                    body.style.overflow = '';
+                }, 400);
             } else {
-                body.style.overflow = '';
+                // Open menu
+                overlay.classList.add('active');
+                body.style.overflow = 'hidden';
             }
         }
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('nav-overlay');
+                if (overlay.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
+        });
 
         // Modal Functions
         function openModal() {
